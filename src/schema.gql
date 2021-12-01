@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: String!
+  password: String!
+  email: String!
+  status: UserStatusEnum!
+
+  """Profile picture"""
+  picture: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+"""A users statuses."""
+enum UserStatusEnum {
+  """Created user but not linked with his personal information"""
+  IN_REVIEW
+
+  """Created and linked with his personal information"""
+  ACTIVE
+
+  """Blocked for bad login, need to recobery his password"""
+  BLOCKED
+
+  """Blocked for particular reasons"""
+  UNACTIVE
+}
+
+type Auth {
+  access_token: String!
+}
+
+type Query {
+  users: [User!]!
+  user(_id: String!): User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(_id: String!): User!
+  login(password: String!, email: String!): Auth!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+
+  """Profile picture"""
+  picture: String
+}
+
+input UpdateUserInput {
+  """User id to update"""
+  _id: String!
+
+  """User name"""
+  name: String
+  email: String
+
+  """Profile picture"""
+  picture: String
+  isTeacher: Boolean
+}
