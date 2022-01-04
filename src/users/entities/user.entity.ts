@@ -23,7 +23,7 @@ export class User {
   @Field()
   email: string;
 
-  @Prop({ required: true, enum: UserStatusEnum })
+  @Prop({ enum: UserStatusEnum, default: UserStatusEnum.IN_REVIEW })
   @Field((type) => UserStatusEnum)
   status: UserStatusEnum;
 

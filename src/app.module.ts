@@ -8,6 +8,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { AuthLogModule } from './auth-log/auth-log.module';
+import { AuthLogModule } from './auth-log/auth-log.module';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { UsersModule } from './users/users.module';
     EventEmitterModule.forRoot(),
     UsersModule,
     AuthModule,
+    AuthLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],

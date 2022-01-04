@@ -14,6 +14,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { User, UserDocument } from './entities/user.entity';
 import * as bcrypt from 'bcryptjs';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class UsersService {
@@ -49,6 +50,7 @@ export class UsersService {
       if (thrownError instanceof BadRequestException) {
         throw thrownError;
       } else {
+        console.log(thrownError);
         throw new InternalServerErrorException();
       }
     } finally {
@@ -57,11 +59,19 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[] | undefined> {
-    return await this.userModel.find();
+    try {
+      return await this.userModel.find();
+    } catch (thrownError) {
+      throw new InternalServerErrorException();
+    }
   }
 
   async findOne(_id: string): Promise<User | undefined> {
-    return await this.userModel.findOne({ _id });
+    try {
+      return await this.userModel.findOne({ _id });
+    } catch (thrownError) {
+      throw new InternalServerErrorException();
+    }
   }
 
   async findOneByEmail(email: string): Promise<User | undefined> {
